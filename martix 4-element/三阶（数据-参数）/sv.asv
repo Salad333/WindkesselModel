@@ -1,0 +1,35 @@
+load wangshouzhen.mat;
+ma=max(pulse);
+mi=min(pulse);
+gy=(pulse-mi)/(ma-mi);
+bpd=80;
+bps=120;
+hg=gy*(bps-bpd)+bpd;
+plot(hg)
+pulse=hg;
+FindABminpoint(pulse(5:length(pulse)),0.2);
+load minypo.mat;
+load maxypo.mat;
+load minpo.mat;
+load maxpo.mat;
+ps=mean(ymax);
+pd=mean(ymin);
+[m,index]=min(abs(pd-ymin))
+ min_valuey=ymin(index);
+ min_valuex=xmin(index);
+% [m,index]=min(abs(ps-ymax))
+%  max_valuex=xmax(index);
+%  max_valuey=ymax(index);
+% plot(pulse(xmin(index-1):xmin(index)))
+
+pm=sum(pulse(xmin(index-1):xmin(index)))/length(pulse(xmin(index-1):xmin(index)));
+% plot(pulse);   
+% hold on
+% plot(min_valuex, min_valuey,'r.');
+% hold on;
+% plot( max_valuex, max_valuey,'r.');    
+k=(pm-pd)/(ps-pd);
+sv=0.283*0.8*(ps-pd)/(k^2);
+pv=0;%æ≤¬ˆ—π
+r=((pm-pv)/sv)*0.8%Õ‚÷‹◊Ë¡¶
+c=(k*sv)/(ps-pd)
